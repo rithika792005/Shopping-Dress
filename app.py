@@ -43,10 +43,21 @@ def admin_required(f):
 @app.route("/")
 def home():
     try:
-        products = list(mongo.db.products.find())
+        search = request.args.get("search")
+
+        if search:
+            products = list(
+                mongo.db.products.find({
+                    "name": {"$regex": search, "$options": "i"}
+                })
+            )
+        else:
+            products = list(mongo.db.products.find())
+
         return render_template("dashboard.html", products=products)
+
     except Exception as e:
-        return str(e)
+        return f"ERROR: {e}"
 # ==========================
 # REGISTER
 # ==========================
