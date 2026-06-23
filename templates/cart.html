@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cart</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+<h2>My Cart</h2>
+
+<table>
+
+<tr>
+<th>Product</th>
+<th>Price</th>
+<th>Action</th>
+</tr>
+
+{% for item in items %}
+
+<tr>
+
+<td>{{ item.name }}</td>
+
+<td>₹{{ item.price }}</td>
+
+<td>
+<a href="/remove_cart/{{ item._id }}">
+Remove
+</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a class="btn"
+onclick="placeOrder()"
+href="/place_order">
+Place Order
+</a>
+
+</div>
+
+<script src="{{ url_for('static',filename='script.js') }}"></script>
+
+</body>
+</html>

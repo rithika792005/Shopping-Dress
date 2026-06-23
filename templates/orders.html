@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Orders</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            background:#eaeded;
+        }
+
+        .navbar{
+            background:#131921;
+            color:white;
+            padding:15px 30px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .navbar a{
+            color:white;
+            text-decoration:none;
+            margin-left:15px;
+        }
+
+        .container{
+            width:90%;
+            margin:30px auto;
+        }
+
+        .title{
+            margin-bottom:20px;
+            color:#111;
+        }
+
+        .order-card{
+            background:white;
+            border-radius:10px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom:20px;
+            overflow:hidden;
+        }
+
+        .order-header{
+            background:#f7f7f7;
+            padding:15px;
+            display:flex;
+            justify-content:space-between;
+            border-bottom:1px solid #ddd;
+        }
+
+        .order-body{
+            padding:20px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .product-info h3{
+            color:#0066c0;
+            margin-bottom:10px;
+        }
+
+        .price{
+            color:#B12704;
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .status{
+            background:#d4edda;
+            color:#155724;
+            padding:10px 20px;
+            border-radius:20px;
+            font-weight:bold;
+        }
+
+        .empty{
+            text-align:center;
+            padding:40px;
+            background:white;
+            border-radius:10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h2>Shopping Dress</h2>
+
+    <div>
+        <a href="/">Home</a>
+        <a href="/cart">Cart</a>
+        <a href="/orders">Orders</a>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <h1 class="title">My Orders</h1>
+
+    {% if orders %}
+
+        {% for o in orders %}
+        <div class="order-card">
+
+            <div class="order-header">
+                <span>Order #{{ loop.index }}</span>
+                <span>Delivered</span>
+            </div>
+
+            <div class="order-body">
+
+                <div class="product-info">
+                    <h3>{{ o['product_name'] }}</h3>
+                    <p class="price">₹{{ o['price'] }}</p>
+                </div>
+
+                <div>
+                    <span class="status">
+                        {{ o['status'] }}
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+            <h2>No Orders Found</h2>
+            <p>Start shopping to place your first order.</p>
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
